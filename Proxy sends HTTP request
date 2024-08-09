@@ -1,0 +1,14 @@
+import requests 
+  
+# https://www.swiftproxy.net  
+ 
+proxy = {'http': 'http://204.188.249.107:22540', 'https': 'https://45.58.136.104:15138'} 
+  
+# The target URL to visit 
+target_url = 'http://httpbin.org/get' 
+  
+# Sending requests using a proxy 
+response = requests.get(target_url, proxies=proxy) 
+  
+# Print the response content 
+print(response.text) 
