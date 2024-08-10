@@ -1,0 +1,5 @@
+mport urllib.request 
+proxy_handler = urllib.request.ProxyHandler({'http': 'http://119.28.12.192:19229'}) 
+opener = urllib.request.build_opener(proxy_handler) 
+urllib.request.install_opener(opener) 
+response = urllib.request.urlopen('http://example.org/ip') 
