@@ -1,0 +1,25 @@
+const http = require('http');
+const https = require('https');
+
+// Set IP address and port
+const proxy = 'http://IP address:port';
+
+http.globalAgent = new http.Agent({ proxy: proxy });
+https.globalAgent = new https.Agent({ proxy: proxy });
+
+// Use the http or https modules to make requests, they will automatically use the configured proxy
+https.get('http://example.com', (res) => {
+  let data = '';
+
+  // Receive data fragment
+  res.on('data', (chunk) => {
+    data += chunk;
+  });
+
+  // Data received
+  res.on('end', () => {
+    console.log(data);
+  });
+}).on('error', (err) => {
+  console.error('Error: ' + err.message);
+});
