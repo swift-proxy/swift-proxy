@@ -1,0 +1,16 @@
+import requests
+
+# The IP address and port of the SOCKS5 proxy server
+socks_proxy = 'socks5://IP address:Port'
+
+# Setting proxies parameters
+proxies = {
+    'http': socks_proxy,
+    'https': socks_proxy,
+}
+
+# Send Request
+response = requests.get('http://example.com', proxies=proxies)
+
+# Print the response content
+print(response.text)
