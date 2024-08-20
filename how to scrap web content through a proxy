@@ -1,0 +1,42 @@
+const axios = require('axios'); 
+const cheerio = require('cheerio'); 
+ 
+async function scrapeWebpageWithProxy(url, proxy) { 
+  try { 
+    // Configure axios to use a proxy 
+    const config = { 
+      proxy: { 
+        host: proxy.host, 
+        port: proxy.port, 
+        auth: { 
+          username: proxy.username, 
+          password: proxy.password, 
+        }, 
+      }, 
+    }; 
+ 
+    // Sending HTTP GET request with proxy 
+    const { data } = await axios.get(url, config); 
+ 
+    // Parsing HTML with cheerio 
+    const $ = cheerio.load(data); 
+ 
+    // Extract and return the title of a web page 
+    return $('title').text(); 
+  } catch (error) { 
+    console.error('Scraping error with proxy:', error); 
+  } 
+} 
+ 
+// Example proxy configuration 
+const proxyConfig = { 
+  host: 'your-proxy-host', 
+  port: 'your-proxy-port', 
+  username: 'your-proxy-username', 
+  password: 'your-proxy-password', 
+}; 
+ 
+// Usage Examples 
+scrapeWebpageWithProxy('https://example.com', proxyConfig).then(title => { 
+  console.log('Scraped Title:', title); 
+}); 
