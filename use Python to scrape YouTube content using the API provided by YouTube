@@ -1,0 +1,22 @@
+from googleapiclient.discovery import build
+
+# Setting up an API key
+api_key = "YOUR_API_KEY_HERE"
+
+# Create a YouTube object to interact with it
+youtube = build('youtube', 'v3', developerKey=api_key)
+
+# Call the API's search.list method to retrieve a list of videos that match the specified query
+request = youtube.search().list(
+    part="id,snippet",
+    maxResults=25,
+    q="Python programming",
+    type="video"
+)
+response = request.execute()
+
+# Print video information
+for item in response['items']:
+    print(f"Video Title: {item['snippet']['title']}")
+    print(f"Video ID: {item['id']['videoId']}")
+    print("=" * 60)
