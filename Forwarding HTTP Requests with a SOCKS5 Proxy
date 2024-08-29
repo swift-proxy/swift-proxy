@@ -1,0 +1,9 @@
+import socks 
+import socket 
+import requests 
+
+socks.set_default_proxy(socks.SOCKS5, "IP address", Port) 
+socket.socket = socks.socksocket 
+
+response = requests.get("http://example.com") 
+print(response.text)
